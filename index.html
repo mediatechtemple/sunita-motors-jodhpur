@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunita TVS Jodhpur - Customer Escalation Matrix</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#f3f1ea;
+    --ink:#2b2a26;
+    --muted:#7a766c;
+    --emerald:#0f5e4a;
+    --emerald-deep:#0a3f32;
+    --gold:#c2a14d;
+    --gold-soft:#e8d9a8;
+    --card:#ffffff;
+    --line:#e7e2d6;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter', Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:var(--bg);
+    background-image:radial-gradient(circle at 12% 8%, rgba(15,94,74,0.06), transparent 40%),
+                     radial-gradient(circle at 88% 92%, rgba(194,161,77,0.10), transparent 45%);
+    padding:28px 20px 40px;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+}
+
+.container{
+    max-width:920px;
+    margin:auto;
+}
+
+.header{
+    position:relative;
+    background:linear-gradient(135deg, var(--emerald) 0%, var(--emerald-deep) 100%);
+    color:#fff;
+    padding:42px 28px;
+    text-align:center;
+    border-radius:18px;
+    margin-bottom:26px;
+    overflow:hidden;
+    box-shadow:0 18px 40px -18px rgba(10,63,50,0.55);
+}
+
+.header::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:4px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.header h1{
+    font-family:'Playfair Display', Georgia, serif;
+    font-size:34px;
+    letter-spacing:0.5px;
+    margin-bottom:10px;
+}
+
+.header h2{
+    font-weight:500;
+    font-size:17px;
+    color:var(--gold-soft);
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.notice{
+    background:#fffaf0;
+    border:1px solid var(--gold-soft);
+    border-left:5px solid var(--gold);
+    padding:16px 18px;
+    border-radius:12px;
+    margin-bottom:24px;
+    line-height:1.6;
+    color:#5d5747;
+}
+
+.notice strong{
+    color:var(--emerald-deep);
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:16px;
+    box-shadow:0 8px 24px -16px rgba(43,42,38,0.45);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 36px -20px rgba(15,94,74,0.45);
+    border-color:var(--gold-soft);
+}
+
+.level{
+    display:inline-block;
+    background:linear-gradient(135deg, var(--gold) 0%, #a8862f 100%);
+    color:#fff;
+    padding:6px 16px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:14px;
+    box-shadow:0 4px 12px -4px rgba(168,134,47,0.5);
+}
+
+.name{
+    font-family:'Playfair Display', Georgia, serif;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:4px;
+    color:var(--emerald-deep);
+}
+
+.designation{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.number{
+    font-size:21px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:18px;
+    color:var(--ink);
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.btn{
+    text-decoration:none;
+    padding:11px 16px;
+    border-radius:10px;
+    color:#fff;
+    font-weight:600;
+    font-size:14px;
+    border:none;
+    cursor:pointer;
+    transition:transform .15s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.05);
+    box-shadow:0 8px 18px -8px rgba(0,0,0,0.35);
+}
+
+.btn:active{
+    transform:translateY(0);
+}
+
+.call{
+    background:linear-gradient(135deg, #1f8a5b, #15784d);
+}
+
+.whatsapp{
+    background:linear-gradient(135deg, #25D366, #1cb058);
+}
+
+.copy{
+    background:linear-gradient(135deg, #2f6f63, var(--emerald));
+}
+
+.save{
+    background:linear-gradient(135deg, #b08a36, #8f6d24);
+}
+
+.footer{
+    text-align:center;
+    margin-top:30px;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.footer strong{
+    font-family:'Playfair Display', Georgia, serif;
+    color:var(--emerald-deep);
+    font-size:17px;
+    letter-spacing:0.5px;
+}
+
+/* Toast for copy feedback */
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:26px;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--emerald-deep);
+    color:#fff;
+    padding:12px 22px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:500;
+    box-shadow:0 10px 30px -10px rgba(0,0,0,0.5);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease;
+    z-index:1000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+@media (max-width:480px){
+    .header h1{font-size:27px;}
+    .btn{flex:1 1 auto; text-align:center;}
+}
+</style>
+
+<script>
+function copyNumber(number){
+    navigator.clipboard.writeText(number).then(function(){
+        showToast("Number copied: " + number);
+    }).catch(function(){
+        showToast("Number copied: " + number);
+    });
+}
+
+function showToast(message){
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(function(){
+        toast.classList.remove('show');
+    }, 2200);
+}
+
+function downloadVCF(name,title,phone){
+    const vcf =
+`BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+ORG:Sunita TVS Jodhpur
+TITLE:${title}
+TEL;TYPE=CELL:${phone}
+END:VCARD`;
+
+    const blob = new Blob([vcf], {type:'text/vcard'});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = name.replace(/ /g,'_') + '.vcf';
+    link.click();
+    showToast("Saving contact: " + name);
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+    <h1>Sunita TVS Jodhpur</h1>
+    <h2>Customer Escalation Matrix</h2>
+</div>
+
+<div class="notice">
+    <strong>Customer Advisory:</strong><br>
+    If your concern is not resolved at the current level, please escalate to the next level.
+</div>
+
+<!-- L1 -->
+<div class="card">
+    <div class="level">L1 Escalation</div>
+    <div class="name">Amit Sharma</div>
+    <div class="designation">Territory Manager, TVS Motor</div>
+    <div class="number">99521 11023</div>
+
+    <div class="buttons">
+        <a class="btn call" href="tel:9952111023">📞 Call</a>
+        <a class="btn whatsapp" href="https://wa.me/919952111023">💬 WhatsApp</a>
+        <button class="btn copy" onclick="copyNumber('9952111023')">📋 Copy Number</button>
+        <button class="btn save" onclick="downloadVCF('Amit Sharma','Territory Manager, TVS Motor (L1 Escalation)','9952111023')">👤 Save Contact</button>
+    </div>
+</div>
+
+<!-- L2 -->
+<div class="card">
+    <div class="level">L2 Escalation</div>
+    <div class="name">Arpit Gulecha</div>
+    <div class="designation">Dealer Owner</div>
+    <div class="number">98297 69999</div>
+
+    <div class="buttons">
+        <a class="btn call" href="tel:9829769999">📞 Call</a>
+        <a class="btn whatsapp" href="https://wa.me/919829769999">💬 WhatsApp</a>
+        <button class="btn copy" onclick="copyNumber('9829769999')">📋 Copy Number</button>
+        <button class="btn save" onclick="downloadVCF('Arpit Gulecha','Dealer Owner (L2 Escalation)','9829769999')">👤 Save Contact</button>
+    </div>
+</div>
+
+<!-- L3 -->
+<div class="card">
+    <div class="level">L3 Escalation</div>
+    <div class="name">Manoj Sain</div>
+    <div class="designation">Workshop Manager</div>
+    <div class="number">82097 32330</div>
+
+    <div class="buttons">
+        <a class="btn call" href="tel:8209732330">📞 Call</a>
+        <a class="btn whatsapp" href="https://wa.me/918209732330">💬 WhatsApp</a>
+        <button class="btn copy" onclick="copyNumber('8209732330')">📋 Copy Number</button>
+        <button class="btn save" onclick="downloadVCF('Manoj Sain','Workshop Manager (L3 Escalation)','8209732330')">👤 Save Contact</button>
+    </div>
+</div>
+
+<!-- L4 -->
+<div class="card">
+    <div class="level">L4 Escalation</div>
+    <div class="name">Garima Mathur</div>
+    <div class="designation">Customer Relationship Manager</div>
+    <div class="number">92519 89846</div>
+
+    <div class="buttons">
+        <a class="btn call" href="tel:9251989846">📞 Call</a>
+        <a class="btn whatsapp" href="https://wa.me/919251989846">💬 WhatsApp</a>
+        <button class="btn copy" onclick="copyNumber('9251989846')">📋 Copy Number</button>
+        <button class="btn save" onclick="downloadVCF('Garima Mathur','Customer Relationship Manager (L4 Escalation)','9251989846')">👤 Save Contact</button>
+    </div>
+</div>
+
+<div class="footer">
+    <strong>Sunita TVS Jodhpur</strong><br>
+    Committed to Customer Satisfaction
+</div>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+</body>
+</html>
